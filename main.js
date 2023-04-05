@@ -210,87 +210,137 @@
 //     })
 //----------------------------Promise Example---------------
 //
-var users = [
-    {
-        id: 1,
-        name:'Hùng'
-    },
-    {
-        id: 2,
-        name:'Nam'
-    },
-    {
-        id: 3,
-        name:'Minh'
-    }
-];
-var comments = [
-    {
-        id: 1,
-        user_id: 1,
-        content: 'Hí anh em'
-    },
-    {
-        id: 2,
-        user_id: 2,
-        content: 'Hôm nay tôi sủi nhé'
-    },
-    {
-        id: 3,
-        user_id: 3,
-        content: 'Ngày mai đi chơi nhé các bạn'
-    }
-];
-//1. Lấy comment:
-//2. Từ comment lấy ra user_id
-//3. Từ user_id lấy ra user tương ứng
-//fake API:
-function getComment(){
-    return new Promise(function(resolve, reject){
-        setTimeout(function(){
-            resolve(comments);
-        }, 2000);
-    });
-};
-function getUsersById(userIds){
-    return new Promise(function(resolve){
-        var result = users.filter(function(user){
-            return userIds.includes(user.id);
-        });
-        resolve(result);
-    }, 1000);
-}
+// var users = [
+//     {
+//         id: 1,
+//         name:'Hùng'
+//     },
+//     {
+//         id: 2,
+//         name:'Nam'
+//     },
+//     {
+//         id: 3,
+//         name:'Minh'
+//     }
+// ];
+// var comments = [
+//     {
+//         id: 1,
+//         user_id: 1,
+//         content: 'Hí anh em'
+//     },
+//     {
+//         id: 2,
+//         user_id: 2,
+//         content: 'Hôm nay tôi sủi nhé'
+//     },
+//     {
+//         id: 3,
+//         user_id: 3,
+//         content: 'Ngày mai đi chơi nhé các bạn'
+//     }
+// ];
+// //1. Lấy comment:
+// //2. Từ comment lấy ra user_id
+// //3. Từ user_id lấy ra user tương ứng
+// //fake API:
+// function getComment(){
+//     return new Promise(function(resolve, reject){
+//         setTimeout(function(){
+//             resolve(comments);
+//         }, 2000);
+//     });
+// };
+// function getUsersById(userIds){
+//     return new Promise(function(resolve){
+//         var result = users.filter(function(user){
+//             return userIds.includes(user.id);
+//         });
+//         resolve(result);
+//     }, 1000);
+// }
 
-getComment()
-    .then(function(comments){
-        //console.log(comment);
-        var users_id = comments.map(function(comment){
-            return comment.user_id;
-        });
-        //console.log(users_id);
-        return getUsersById(users_id)
-                    .then(function(users){
-                        return {
-                            users: users,
-                            comments: comments,
-                        }
-                    });
-        })
-    .then(function(data){
-        //console.log(data);
-        var commentBlock = document.getElementById('comment-box');
-        var html ="";
-        data.comments.forEach(function(comment){
-            var user = data.users.find(function(user){
-                return user.id === comment.user_id;
-            });
-            html += `<li>${user.name}: ${comment.content}</li>`;
-        });
-        commentBlock.innerHTML = html;
-    })
+// getComment()
+//     .then(function(comments){
+//         //console.log(comment);
+//         var users_id = comments.map(function(comment){
+//             return comment.user_id;
+//         });
+//         //console.log(users_id);
+//         return getUsersById(users_id)
+//                     .then(function(users){
+//                         return {
+//                             users: users,
+//                             comments: comments,
+//                         }
+//                     });
+//         })
+//     .then(function(data){
+//         //console.log(data);
+//         var commentBlock = document.getElementById('comment-box');
+//         var html ="";
+//         data.comments.forEach(function(comment){
+//             var user = data.users.find(function(user){
+//                 return user.id === comment.user_id;
+//             });
+//             html += `<li>${user.name}: ${comment.content}</li>`;
+//         });
+//         commentBlock.innerHTML = html;
+//     })
 //Hiểu chức năng mảng
 //Hàm, callback
 //Promise
 //DOM 
 
 //promise hell
+//--------------------------------FETCH----------------------------------
+//Khái niệm
+//API: Application Programming interface: giao diện lập trình ứng dụng
+//- Cổng giao tiếp giữa các phần mềm. Hiểu đơn giản là URL
+// Backend: trả API -> sd Fetch -> JSON/XML
+//JSON.parse -> JS type.
+//Render ra giao diện với HTML
+//Cách sử dụng fetch
+// var postAPI = 'https://jsonplaceholder.typicode.com/posts';
+// //trả về stream
+// fetch(postAPI)//Sử dụng Promise
+//     .then(function(reponse){
+//         //Chuyển từ JSON sang JS
+//         return reponse.json();
+//     })
+//     .then(function(posts){
+//         //nhận JS object
+//         console.log(posts);
+//         //Lấy dữ liệu hiển thị lên web
+//         //Dùng map để trả về mảng
+//         var htmls = posts.map(function(post){
+//             return `<li>
+//                 <h2>${post.title}</h2>
+//                 <p>${post.body}</p>
+//             </li>`
+//         })
+//         htmls.join('');
+//         document.getElementById("comment-box").innerHTML = htmls;
+//     })
+//--------------------------------JSON SERVER-----------------------------
+
+var courseAPI = 'http://localhost:3000/courses';
+fetch(courseAPI)
+    .then(function(responsive){
+        return responsive.json();
+    })
+    .then(function(posts){
+        console.log(posts);
+        //Show lên web
+        var htmls = posts.map(function(post){
+            return `
+            <li>
+                <h2>${post['title']}</h2>
+                <p>${post['body']}<p>
+            </li>
+            `
+        });
+        htmls.join('');
+        document.querySelector("#comment-box").innerHTML = htmls;
+    })
