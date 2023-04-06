@@ -325,22 +325,110 @@
 //     })
 //--------------------------------JSON SERVER-----------------------------
 
-var courseAPI = 'http://localhost:3000/courses';
-fetch(courseAPI)
-    .then(function(responsive){
-        return responsive.json();
-    })
-    .then(function(posts){
-        console.log(posts);
-        //Show lên web
-        var htmls = posts.map(function(post){
-            return `
-            <li>
-                <h2>${post['title']}</h2>
-                <p>${post['body']}<p>
-            </li>
-            `
-        });
-        htmls.join('');
-        document.querySelector("#comment-box").innerHTML = htmls;
-    })
+// var courseAPI = 'http://localhost:3000/courses';
+// fetch(courseAPI)
+//     .then(function(responsive){
+//         return responsive.json();
+//     })
+//     .then(function(posts){
+//         console.log(posts);
+//         //Show lên web
+//         var htmls = posts.map(function(post){
+//             return `
+//             <li>
+//                 <h2>${post['title']}</h2>
+//                 <p>${post['body']}<p>
+//             </li>
+//             `
+//         });
+//         htmls.join('');
+//         document.querySelector("#comment-box").innerHTML = htmls;
+//     })
+//-- dùng postman làm việc với RESTAPI
+//CRUD:
+//+ Create: Tạo mới --> POSH
+//+Read: Lấy dữ liệu --> Get
+//Update: Chỉnh sửa --> PUT/PATCH
+//Delete: Xóa --> DELETE
+//--> Nhập vào phần body, tìm đến x-www from url encode
+//Dùng fetch và REST API
+// var listCourseBlock = document.querySelector(".list-course")
+
+// var link = 'http://localhost:3000/courses';
+// function start(){
+//     getCourse(renderCourse);
+//     handleForm();
+// }
+
+// start();
+
+// //Tạo hàm get data bằng API
+// function getCourse(callback){
+//     fetch(link)
+//         .then(function(responsive){
+//             return responsive.json();
+//         })
+//         .then(callback)
+// }
+// //Tạo hàm render course
+// function renderCourse(course){
+//     var htmls = course.map(function(currData){
+//         return `
+//         <li>
+//             <h2>${currData['title']}</h2>
+//             <p>${currData['body']}</p>
+//             <button onclick="handleDeleteCourse(${currData.id})" >Xóa</button>
+//         </li>
+//         `
+//     })
+//     htmls.join();
+//     listCourseBlock.innerHTML = htmls;
+// }
+// //Function create
+// function createCourse(data, callback){
+//     var options = {
+//         method: 'POST',
+//         headers: {
+//             "Content-Type": "application/json",
+//             // 'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//         body: JSON.stringify(data)
+//     }
+//     fetch(link, options)
+//         .then(function(response){
+//             return response.json()
+//         })
+//         .then(callback)
+// }//function delete course
+// function handleDeleteCourse(id){
+//     var options = {
+//         method: 'DELETE',
+//         headers: {
+//             "Content-Type": "application/json",
+//             // 'Content-Type': 'application/x-www-form-urlencoded',
+//         },
+//     }
+//     fetch(link + '/' + id, options)
+//         .then(function(response){
+//             return response.json()
+//         })
+//         .then(function(){
+//             getCourse(renderCourse);
+//         })
+//     }
+// //Function handle
+// function handleForm(){
+//     //Lắng nghe click nút
+//     var createBtn = document.querySelector("#create");
+//     createBtn.onclick = function(){
+//         var title = document.querySelector("input[name = 'title']").value;
+//         var description = document.querySelector("input[name ='description']").value;
+//         var formData = {
+//             title : title,
+//             body: description
+//         }
+//         createCourse(formData);
+//     }
+// }
+var a = document.querySelector("#comment-box ul")
+console.log(a);

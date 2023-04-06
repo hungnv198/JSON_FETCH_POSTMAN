@@ -1,10 +1,9 @@
 {
-    "courses":[
-        {
-            "id": 1,
-            "title":"Kiến thức cơ bản cho người mới bắt đầu",
-            "body":"Kiến thức cơ bản cho người mới"
-        }
-
-    ]
+  "courses": [
+    {
+      "id": 1,
+      "title": "Kiến thức cơ bản cho người mới bắt đầu",
+      "body": "Kiến thức cơ bản cho người mới"
+    }
+  ]
 }
