@@ -102,6 +102,6 @@ function handleUpdateData(id){
         .then(function(response){
             return response.json()
         })
-
+        
     }
 }
